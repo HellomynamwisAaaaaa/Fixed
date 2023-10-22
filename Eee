@@ -1,0 +1,140 @@
+local library = {}
+
+function library:Call()
+	local LIBBYLIB = Instance.new("ScreenGui")
+	LIBBYLIB.Name = "LIBBY LIB"
+	LIBBYLIB.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	LIBBYLIB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	
+	local Main = Instance.new("Frame")
+	Main.Name = "Main"
+	Main.Parent = LIBBYLIB
+	Main.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.224844724, 0, 0.224448889, 0)
+	Main.Size = UDim2.new(0, 420, 0, 240)
+	
+	local UICorner = Instance.new("UICorner")
+	UICorner.Parent = Main
+	
+	local TabsContainer = Instance.new("Frame")
+	TabsContainer.Name = "TabsContainer"
+	TabsContainer.Parent = Main
+	TabsContainer.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+	TabsContainer.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabsContainer.BorderSizePixel = 0
+	TabsContainer.Position = UDim2.new(0.0224637706, 0, 0.0494489037, 0)
+	TabsContainer.Size = UDim2.new(0, 141, 0, 220)
+	
+	local UICorner_2 = Instance.new("UICorner")
+	UICorner_2.Parent = TabsContainer
+	
+	local scroll = Instance.new("ScrollingFrame")
+	scroll.Name = "scroll"
+	scroll.Parent = TabsContainer
+	scroll.Active = true
+	scroll.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	scroll.BackgroundTransparency = 1.000
+	scroll.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	scroll.BorderSizePixel = 0
+	scroll.Size = UDim2.new(0, 141, 0, 219)
+	scroll.CanvasSize = UDim2.new(0, 0, 0, 0)
+	scroll.ScrollBarThickness = 4
+	
+	local UIListLayout = Instance.new("UIListLayout")
+	UIListLayout.Parent = scroll
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.Padding = UDim.new(0, 5)
+	
+	local TabHolder = Instance.new("Frame")
+	TabHolder.Name = "TabHolder"
+	TabHolder.Parent = Main
+	TabHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TabHolder.BackgroundTransparency = 1.000
+	TabHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabHolder.BorderSizePixel = 0
+	TabHolder.Position = UDim2.new(0.380952388, 0, 0.0458333343, 0)
+	TabHolder.Size = UDim2.new(0, 251, 0, 220)
+	
+	local Containers = Instance.new("Folder")
+	Containers.Name = "Containers"
+	Containers.Parent = TabHolder
+	
+	local InsideLibrary = {}
+	
+	function InsideLibrary:CreateTab(text)
+		local TabButton = Instance.new("TextButton")
+		TabButton.Name = text .. " Tab"
+		TabButton.Parent = scroll
+		TabButton.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+		TabButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		TabButton.BorderSizePixel = 0
+		TabButton.Size = UDim2.new(0, 141, 0, 36)
+		TabButton.Font = Enum.Font.GothamBold
+		TabButton.Text = text
+		TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TabButton.TextScaled = true
+		TabButton.TextSize = 14.000
+		TabButton.TextWrapped = true
+		
+		local UICorner_3 = Instance.new("UICorner")
+		UICorner_3.Parent = TabButton
+		
+		local Container2 = Instance.new("Frame")
+		Container2.Name = text .. " Container"
+		Container2.Parent = Containers
+		Container2.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+		Container2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		Container2.BorderSizePixel = 0
+		Container2.Size = UDim2.new(0, 251, 0, 220)
+		
+		local UICorner_4 = Instance.new("UICorner")
+		UICorner_4.Parent = Container2
+		
+		local holder = Instance.new("ScrollingFrame")
+		holder.Name = "holder"
+		holder.Parent = Container2
+		holder.Active = true
+		holder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		holder.BackgroundTransparency = 1.000
+		holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
+		holder.BorderSizePixel = 0
+		holder.Size = UDim2.new(0, 251, 0, 220)
+		holder.CanvasSize = UDim2.new(0, 0, 0, 0)
+		holder.ScrollBarThickness = 4
+		
+		local UIListLayout_2 = Instance.new("UIListLayout")
+		UIListLayout_2.Parent = holder
+		UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+		UIListLayout_2.Padding = UDim.new(0, 10)
+		
+		-- tab switch script
+		TabButton.MouseButton1Click:Connect(function()
+			for i,v in next, Containers:GetChildren() do
+				v.Visible = false
+			end
+			Container2.Visible = true
+		end)
+		
+		local buttonLib = {}
+		
+		function buttonLib:NewButton(text, callback)
+			local btn = Instance.new("TextButton")
+			btn.Name = "btn"
+			btn.Parent = holder
+			btn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			btn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+			btn.BorderSizePixel = 0
+			btn.Size = UDim2.new(0, 251, 0, 50)
+			btn.Font = Enum.Font.SourceSans
+			btn.TextColor3 = Color3.fromRGB(0, 0, 0)
+			btn.TextSize = 14.000
+			btn.MouseButton1Click:Connect(callback)
+			btn.Text = text
+		end
+		return buttonLib -- dont delete
+	end
+	return InsideLibrary -- dont delete
+	
+end
